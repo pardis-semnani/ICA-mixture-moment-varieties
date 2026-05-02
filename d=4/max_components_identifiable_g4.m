@@ -1,5 +1,5 @@
 % Finds the maximum number of components m_max that keeps the Jacobian of
-% Q_{n,m,4} full-column-rank. Gamma_4 is given in the proof.
+% Q_{n,m,4} full-column-rank. m_proof is the bound given in the proof.
 function [max_m, m_proof] = max_components_identifiable_g4(n)
 
 Gamma_4 = 0;
