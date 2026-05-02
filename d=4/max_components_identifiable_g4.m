@@ -17,12 +17,16 @@ while true
     b = rand(n,1);
     D = rand(1,n);
     F = rand(1,n);
-    J1 = jacobian_g4(b,A,D,F);
+    if k == 1
+        b1 = b;
+    end
+
+    J1 = jacobian_g4(b,A,D,F,b1);
     J = [J J1];
 
 
 
-    if rank(J) < k*(size(J1,2))
+    if rank(J) < k*(size(J1,2))-1
         max_m = k-1;
         return
     end

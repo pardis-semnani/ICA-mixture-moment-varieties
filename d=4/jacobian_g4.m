@@ -1,9 +1,9 @@
 % Finds the Jacobian of Q_{n,1,4} (1 component and d=4) 
-% at a give parameter (b, A, D, F), where b: n*1, A: n*n, D: 1*n, F: 1*n.
-% Here the weights are known.
-function J = jacobian_g4(b, A, D, F) 
+% at a give parameter (b, A, D, F, b1), where b: n*1, A: n*n, D: 1*n, F: 1*n, 
+% b1: n*1, and b1 is the b in the first component.
+function J = jacobian_g4(b, A, D, F, b1) 
 n = size(b,1);
-J = zeros(n+n^2+n^3+n^4, 3*n+n^2);
+J = zeros(n+n^2+n^3+n^4, 3*n+n^2+1);
 C = 1/2 * der([b b]);
 C1 = 1/6 * der([b b b]);
 for j=1:n
@@ -28,5 +28,6 @@ for j = 1:n
     J(:, n^2+2*n+j) = [zeros(n+n^2+n^3,1) ; kron(kron(kron(A(:,j),A(:,j)),A(:,j)),A(:,j))];
 end
 
-
+J(:, end) = [b - b1; kron(b,b) - kron(b1,b1) ; kron(kron(b,b),b) - kron(kron(b1,b1),b1) ;
+    kron(kron(kron(b,b),b),b) - kron(kron(kron(b1,b1),b1),b1)];
 end
